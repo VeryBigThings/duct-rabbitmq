@@ -17,7 +17,8 @@
            (let [ch (lch/open connection)
                  queue (if declare-queue
                          (lq/declare ch queue declare-queue)
-                         queue)]
+                         queue)
+                 handler (lc/ack-unless-exception handler)]
              (when exchange
                (if routing-keys
                  (doseq [routing-key routing-keys]
